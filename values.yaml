@@ -1,0 +1,34 @@
+Name: locust
+
+image:
+  repository: 755695800045.dkr.ecr.us-east-1.amazonaws.com/jdriver/locust
+  tag: latest
+  pullPolicy: Always
+  pullSecrets: []
+
+service:
+  name: master-web
+  type: NodePort
+  externalPort: 8089
+  internalPort: 8089
+  nodePort: 0
+  annotations: {}
+  extraLabels: {}
+
+master:
+  config:
+    target_url: http://www.jobcase.com
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  nodeSelector: {}
+    # kops.k8s.io/instancegroup: master
+  tolerations: {}
+  # - key: "application"
+  #   operator: "Equal"
+  #   value: "api"
+  #   effect: "NoSchedule"
